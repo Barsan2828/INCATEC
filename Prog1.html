@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Header Campoalto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul-1:#0a1a5c;
+    --azul-2:#1c3fae;
+    --amarillo:#D4AF37;
+    --amarillo-hover:#b8952d;
+    --blanco:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Poppins', Arial, Helvetica, sans-serif;}
+
+  /* ===== Mini barra superior (PQRSFD) ===== */
+  .mini-bar{
+    background:#0a1230;
+    display:flex;
+    justify-content:flex-end;
+    padding:6px 40px;
+  }
+  .mini-bar a{
+    color:var(--blanco);
+    font-family:'Poppins', sans-serif;
+    font-size:12px;
+    text-decoration:none;
+    letter-spacing:.5px;
+  }
+  .mini-bar a:hover{
+    color:var(--amarillo);
+  }
+
+  /* ===== Barra superior ===== */
+  .top-bar{
+    background:linear-gradient(135deg, var(--azul-1) 0%, var(--azul-2) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 40px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  .logo-area{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:var(--blanco);
+  }
+  .logo-area img{height:120px; margin-top:14px;}
+
+  .top-right{
+    display:flex;
+    align-items:center;
+    gap:24px;
+  }
+
+  /* ===== Botones tipo píldora (Matricúlate / Soy estudiante) ===== */
+  .top-buttons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .btn-pill{
+    display:inline-block;
+    border:none;
+    cursor:pointer;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:11px 26px;
+    border-radius:8px;
+    background:linear-gradient(180deg, #f7c85f 0%, #e8a93a 100%);
+    color:#1a1a2e;
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+    transition:background .25s ease, transform .15s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn-pill:hover{
+    transform:translateY(-2px);
+  }
+  .btn-pill.on{
+    background:linear-gradient(180deg, var(--azul-2) 0%, var(--azul-1) 100%);
+    color:var(--blanco);
+  }
+
+  .search-box{
+    display:flex;
+    align-items:center;
+  }
+  .search-box input{
+    height:40px;
+    width:200px;
+    border:none;
+    padding:0 14px;
+    font-size:13px;
+    font-family:'Poppins', sans-serif;
+    background:#e9e9e9;
+    border-radius:6px 0 0 6px;
+  }
+  .search-box button{
+    height:40px;
+    width:44px;
+    background:var(--amarillo);
+    border:none;
+    color:var(--blanco);
+    font-size:15px;
+    border-radius:0 6px 6px 0;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .search-box button:hover{background:var(--amarillo-hover);}
+
+  /* ===== Menú de navegación ===== */
+  .nav-bar{
+    background:linear-gradient(90deg, #e8c34a 0%, var(--amarillo) 50%, #b8862a 100%);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .nav-bar a{
+    color:var(--blanco);
+    text-decoration:none;
+    font-size:16px;
+    font-weight:700;
+    padding:14px 20px;
+    border-right:1px solid rgba(255,255,255,.35);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
+    transition:background .2s ease, color .2s ease;
+  }
+  .nav-bar a:last-child{border-right:none;}
+  .nav-bar a:hover{background:var(--amarillo-hover);}
+
+  /* Estado activo al hacer clic */
+  .nav-bar a.active{
+    background:var(--azul-1);
+    color:var(--blanco);
+  }
+
+  /* ===== Banner / Slider ===== */
+  .hero-banner{
+    position:relative;
+    overflow:hidden;
+    min-height:170px;
+    background:#0a1230;
+  }
+
+  .slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .6s ease;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .slide.active{
+    opacity:1;
+    visibility:visible;
+    position:relative;
+  }
+
+  /* Slide 1 - fondo blanco */
+  .slide-1{
+    background-color:#ffffff;
+    background-image:url('banner1-blanco.png');
+  }
+
+  /* Slide 3 - fondo azul con movimiento */
+  .slide-3{
+    background-color:#14206b;
+    background-image:url('banner3-azul.png');
+  }
+  .slide-3 .glow{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .slide-3 .glow span{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:.55;
+    background:radial-gradient(circle, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%);
+    animation:flotar 6s ease-in-out infinite;
+  }
+  .slide-3 .glow span:nth-child(1){ width:70px; height:70px; top:15%; left:8%; animation-delay:0s; }
+  .slide-3 .glow span:nth-child(2){ width:40px; height:40px; top:65%; left:20%; animation-delay:1.2s; }
+  .slide-3 .glow span:nth-child(3){ width:55px; height:55px; top:30%; left:92%; animation-delay:.6s; }
+  .slide-3 .glow span:nth-child(4){ width:30px; height:30px; top:75%; left:85%; animation-delay:2s; }
+  .slide-3 .glow span:nth-child(5){ width:90px; height:90px; top:5%; left:55%; animation-delay:.3s; }
+
+  @keyframes flotar{
+    0%,100%{ transform:translateY(0) scale(1); opacity:.55; }
+    50%{ transform:translateY(-18px) scale(1.15); opacity:.9; }
+  }
+
+  .slide-3 img.mascota-mov{
+    animation:balanceo 3s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  @keyframes balanceo{
+    0%,100%{ transform:rotate(0deg); }
+    50%{ transform:rotate(2deg); }
+  }
+
+  /* Slide 4 */
+  .slide-4{
+    background-color:#ffffff;
+    background-image:url('banner4.png');
+  }
+
+  /* Ajusta la relación de aspecto según el tamaño real de tus banners */
+  .slide-inner{
+    width:100%;
+    padding-top:26.04%; /* proporción ~960x250 */
+  }
+
+  .hero-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:4;
+    background:rgba(0,0,0,.35);
+    color:var(--blanco);
+    border:none;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-arrow.left{ left:14px; }
+  .hero-arrow.right{ right:14px; }
+  .hero-arrow:hover{ background:rgba(0,0,0,.55); }
+
+  .hero-dots{
+    position:absolute;
+    top:16px;
+    right:20px;
+    z-index:4;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .hero-dots button{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:var(--blanco);
+    font-size:12px;
+    font-family:'Poppins', sans-serif;
+    cursor:pointer;
+  }
+  .hero-dots button.active{
+    background:var(--amarillo);
+    color:var(--azul-1);
+    font-weight:700;
+  }
+  .hero-dots .pause{
+    background:rgba(255,255,255,.15);
+  }
+
+  /* ===== Barra de datos inferior ===== */
+  .stats-bar{
+    background:#0a1230;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:60px;
+    padding:22px 30px;
+  }
+  .stats-bar .item{
+    color:var(--blanco);
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    white-space:nowrap;
+  }
+  .stats-bar .item strong{
+    color:var(--amarillo);
+    font-weight:700;
+    margin-right:6px;
+  }  /* ===== Sección ¿Por qué elegirnos? ===== */
+  .elegirnos-section{
+    background:linear-gradient(135deg, var(--azul-1) 0%, var(--azul-2) 100%);
+    padding:55px 60px 65px;
+  }
+  .elegirnos-tag{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--amarillo);
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .elegirnos-tag .linea{
+    width:26px;
+    height:2px;
+    background:var(--amarillo);
+    display:inline-block;
+  }
+  .elegirnos-section h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:32px;
+    color:var(--blanco);
+    line-height:1.25;
+    margin-bottom:16px;
+    max-width:640px;
+  }
+  .elegirnos-section p.elegirnos-desc{
+    font-family:'Poppins', sans-serif;
+    font-size:15px;
+    color:#d7dcf5;
+    max-width:640px;
+    line-height:1.6;
+    margin-bottom:40px;
+  }
+
+  .elegirnos-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+    max-width:1100px;
+  }
+  @media (max-width:700px){
+    .elegirnos-grid{ grid-template-columns:1fr; }
+  }
+
+  .elegirnos-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;
+    padding:30px 28px;
+    cursor:pointer;
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .elegirnos-icono{
+    width:46px;
+    height:46px;
+    border-radius:12px;
+    background:linear-gradient(180deg, #f7c85f 0%, #e8a93a 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:18px;
+    transition:background .25s ease;
+  }
+  .elegirnos-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--blanco);
+    margin-bottom:10px;
+    transition:color .25s ease;
+  }
+  .elegirnos-card p{
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    color:#c9cfec;
+    line-height:1.6;
+    transition:color .25s ease;
+  }
+
+  .elegirnos-card:hover{
+    transform:translateY(-4px);
+  }
+
+  /* Estado activo al hacer clic: resaltado + cambio de color */
+  .elegirnos-card.activo{
+    background:var(--amarillo);
+    border-color:var(--amarillo);
+    box-shadow:0 14px 30px rgba(212,175,55,.35);
+    transform:translateY(-4px) scale(1.02);
+  }
+  .elegirnos-card.activo .elegirnos-icono{
+    background:var(--azul-1);
+  }
+  .elegirnos-card.activo h3{
+    color:var(--azul-1);
+  }
+  .elegirnos-card.activo p{
+    color:#1a2340;
+  }
+
+  /* ===== Footer ===== */
+  .site-footer{
+    background:#0a1230;
+    padding:50px 60px 35px;
+    color:#c9cfe3;
+  }
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;
+    gap:30px;
+  }
+  @media (max-width:900px){
+    .footer-top{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:520px){
+    .footer-top{ grid-template-columns:1fr; }
+  }
+
+  .footer-brand img{ height:60px; margin-bottom:16px; }
+  .footer-brand p{
+    font-family:'Poppins', sans-serif;
+    font-size:13px;
+    line-height:1.6;
+    color:#aab0cc;
+    margin-bottom:18px;
+  }
+  .footer-brand .direccion{
+    font-family:'Poppins', sans-serif;
+    font-size:13px;
+    line-height:1.6;
+    color:#aab0cc;
+    margin-bottom:14px;
+  }
+
+  .footer-col h4{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--blanco);
+    margin-bottom:16px;
+  }
+  .footer-col a{
+    display:block;
+    font-family:'Poppins', sans-serif;
+    font-size:13.5px;
+    color:#aab0cc;
+    text-decoration:none;
+    margin-bottom:12px;
+    transition:color .2s ease;
+  }
+  .footer-col a:hover{
+    color:var(--amarillo);
+  }
+
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-top:40px;
+  }
+
+  .footer-social span{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:var(--blanco);
+    margin-bottom:12px;
+  }
+  .footer-social span::before{
+    content:"";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--amarillo);
+    display:inline-block;
+    flex-shrink:0;
+  }
+  .footer-social-icons{
+    display:flex;
+    gap:10px;
+  }
+  .footer-social-icons a{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#2952d6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--blanco);
+    text-decoration:none;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .footer-social-icons a svg{
+    display:block;
+  }
+  .footer-social-icons a:hover{
+    transform:translateY(-3px);
+    background:var(--amarillo);
+  }
+
+  .footer-cert img{
+    height:70px;
+    background:#fff;
+    border-radius:8px;
+    padding:6px 10px;
+  }
+
+  /* ===== Sección A quiénes llegamos (contadores) ===== */
+  .stats-counter-section{
+    background:linear-gradient(135deg, #0a1230 0%, var(--azul-1) 100%);
+    padding:50px 60px 55px;
+  }
+  .stats-counter-title{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:22px;
+    color:var(--blanco);
+    display:inline-block;
+    position:relative;
+    padding-bottom:14px;
+    margin-bottom:36px;
+  }
+  .stats-counter-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:60px;
+    height:3px;
+    background:var(--amarillo);
+  }
+
+  .stats-counter-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:20px;
+  }
+  .stat-counter-item{
+    flex:1;
+    min-width:150px;
+    text-align:center;
+    padding:0 14px;
+    border-right:1px solid rgba(255,255,255,.18);
+  }
+  .stat-counter-item:last-child{ border-right:none; }
+  @media (max-width:800px){
+    .stat-counter-item{ flex:1 1 40%; border-right:none; margin-bottom:20px; }
+  }
+
+  .stat-counter-number{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:44px;
+    color:var(--amarillo);
+    line-height:1.1;
+  }
+  .stat-counter-label{
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    color:#cfd4ec;
+    margin-top:8px;
+  }
+
+  /* ===== Sección Nuestros Aliados (marquee de logos) ===== */
+  .aliados-section{
+    background:#ffffff;
+    padding:45px 0 55px;
+    position:relative;
+  }
+  .aliados-title{
+    text-align:center;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:24px;
+    color:#111;
+    position:relative;
+    padding-bottom:14px;
+    margin-bottom:36px;
+  }
+  .aliados-title::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:60px;
+    height:3px;
+    background:var(--amarillo);
+  }
+
+  .marquee-wrapper{
+    position:relative;
+    overflow:hidden;
+    width:100%;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  }
+
+  .marquee-track{
+    display:flex;
+    align-items:center;
+    width:max-content;
+    animation:marquee-scroll 32s linear infinite;
+  }
+  .marquee-wrapper:hover .marquee-track{
+    animation-play-state:paused;
+  }
+
+  @keyframes marquee-scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+
+  .aliado-item{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:170px;
+    height:100px;
+    margin:0 22px;
+    background:#fff;
+    border:1px solid #ececf3;
+    border-radius:14px;
+    box-shadow:0 4px 10px rgba(20,32,107,.05);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    padding:14px;
+  }
+  .aliado-item img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    filter:grayscale(15%);
+    transition:filter .3s ease;
+  }
+  .aliado-item:hover{
+    transform:translateY(-6px) scale(1.06);
+    box-shadow:0 16px 28px rgba(28,63,174,.18);
+    border-color:var(--azul-2);
+  }
+  .aliado-item:hover img{
+    filter:grayscale(0%);
+  }
+
+  /* ===== Banner Programas (con estudiante) ===== */
+  .hero-programas{
+    position:relative;
+    overflow:hidden;
+    min-height:320px;
+    background:linear-gradient(120deg, #0a1a5c 0%, #1c3fae 55%, #2a4fc7 100%);
+    display:flex;
+    align-items:center;
+  }
+  .hero-programas .glow{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .hero-programas .glow span{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:.5;
+    background:radial-gradient(circle, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%);
+    animation:flotar 6s ease-in-out infinite;
+  }
+  .hero-programas .glow span:nth-child(1){ width:70px; height:70px; top:15%; left:8%; animation-delay:0s; }
+  .hero-programas .glow span:nth-child(2){ width:40px; height:40px; top:65%; left:20%; animation-delay:1.2s; }
+  .hero-programas .glow span:nth-child(3){ width:55px; height:55px; top:30%; left:92%; animation-delay:.6s; }
+  .hero-programas .glow span:nth-child(4){ width:30px; height:30px; top:75%; left:85%; animation-delay:2s; }
+
+  .hero-programas-texto{
+    position:relative;
+    z-index:2;
+    max-width:600px;
+    padding:0 60px;
+  }
+  .hero-programas-tag{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--amarillo);
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .hero-programas-tag .linea{
+    width:26px;
+    height:2px;
+    background:var(--amarillo);
+    display:inline-block;
+  }
+  .hero-programas-texto h1{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:38px;
+    color:var(--blanco);
+    line-height:1.2;
+    margin-bottom:16px;
+  }
+  .hero-programas-texto h1 span{ color:var(--amarillo); }
+  .hero-programas-texto p{
+    font-family:'Poppins', sans-serif;
+    font-size:15px;
+    color:#d7dcf5;
+    line-height:1.6;
+  }
+
+  .hero-programas-img{
+    position:absolute;
+    right:60px;
+    bottom:0;
+    height:105%;
+    z-index:2;
+    max-width:38%;
+    object-fit:contain;
+  }
+  @media (max-width:900px){
+    .hero-programas-img{ display:none; }
+  }
+
+  /* ===== Grid de escuelas (página Programas) ===== */
+  .programas-listado{
+    background-color:#fffaf3;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:60px 60px 75px;
+  }
+  .programas-listado .oferta-tag{ justify-content:flex-start; }
+  .programas-listado h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:30px;
+    color:#111;
+    margin-bottom:36px;
+    max-width:640px;
+  }
+
+  /* ===== Navegación rápida entre escuelas ===== */
+  .escuelas-nav-rapida{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:#0a1230;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:14px 60px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+  }
+  .escuelas-nav-rapida a{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    color:#cfd4ec;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.15);
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .escuelas-nav-rapida a:hover{
+    background:var(--amarillo);
+    color:#0a1230;
+    border-color:var(--amarillo);
+  }
+
+  /* Ajuste de scroll para que el ancla no quede tapada por el sticky nav */
+  .escuela-header{ scroll-margin-top:70px; }
+
+/* ===== Encabezado de escuela (detalle) ===== */
+  .escuela-header{
+    background-color:#fffaf3;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:50px 60px 10px;
+  }
+  .escuela-header h1{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    color:#0a1230;
+  }
+
+  /* ===== Listado de programas de la escuela ===== */
+  .escuela-listado{
+    background-color:#fffaf3;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:20px 60px 70px;
+  }
+  .escuela-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 300px));
+    justify-content:start;
+    gap:22px;
+  }
+
+  .programa-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid #e3e2ee;
+    border-radius:16px;
+    padding:24px 22px 28px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    cursor:pointer;
+    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .programa-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-75%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);
+    transition:left .65s ease;
+    pointer-events:none;
+  }
+  .programa-card:hover::before{ left:130%; }
+  .programa-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--azul-2);
+    box-shadow:0 14px 28px rgba(28,63,174,.18);
+  }
+
+  .programa-badge{
+    display:inline-block;
+    background:#5b7fd6;
+    color:#fff;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:.5px;
+    padding:8px 14px;
+    border-radius:8px;
+    line-height:1.3;
+  }
+  .programa-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:#0a1230;
+    line-height:1.3;
+  }
+  .programa-lugar{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--amarillo);
+    color:#3a2a05;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    padding:7px 14px;
+    border-radius:20px;
+  }
+
+  /* ===== Botones flotantes de contacto ===== */
+  .flotantes{
+    position:fixed;
+    right:22px;
+    bottom:170px;
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .flotante-item{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+  }
+  .flotante-boton{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#0a1230;
+    color:var(--amarillo);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--amarillo);
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+    transition:transform .25s ease;
+  }
+  .flotante-boton:hover{
+    transform:scale(1.08);
+  }
+  .flotante-texto{
+    position:absolute;
+    right:56px;
+    background:#0a1230;
+    color:var(--amarillo);
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    padding:8px 14px;
+    border-radius:20px;
+    white-space:nowrap;
+    opacity:0;
+    transform:translateX(8px);
+    transition:opacity .25s ease, transform .25s ease;
+    pointer-events:none;
+  }
+  .flotante-item:hover .flotante-texto{
+    opacity:1;
+    transform:translateX(0);
+  }
+
+    /* ===== Widget de chat Aukán ===== */
+  .aukan-widget{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:100;
+    font-family:'Poppins', sans-serif;
+  }
+
+  .aukan-toggle-btn{
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    border:3px solid var(--amarillo);
+    background:#0a1230 url('aukan-juvenil-avatar.png') center/cover;
+    cursor:pointer;
+    box-shadow:0 8px 22px rgba(0,0,0,.3);
+    position:relative;
+    animation:aukan-pulso 2.4s ease-in-out infinite;
+  }
+  @keyframes aukan-pulso{
+    0%,100%{ box-shadow:0 8px 22px rgba(0,0,0,.3), 0 0 0 0 rgba(212,175,55,.5); }
+    50%{ box-shadow:0 8px 22px rgba(0,0,0,.3), 0 0 0 12px rgba(212,175,55,0); }
+  }
+  .aukan-toggle-btn::after{
+    content:"1";
+    position:absolute;
+    top:-4px;
+    right:-4px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#e14b4b;
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid #fff;
+  }
+  .aukan-widget.abierto .aukan-toggle-btn::after{ display:none; }
+
+  .aukan-panel{
+    position:absolute;
+    bottom:80px;
+    right:0;
+    width:320px;
+    max-height:460px;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 18px 40px rgba(0,0,0,.25);
+    overflow:hidden;
+    display:none;
+    flex-direction:column;
+    border:1px solid #e3e2ee;
+  }
+  .aukan-widget.abierto .aukan-panel{ display:flex; }
+
+  .aukan-panel-header{
+    background:linear-gradient(135deg, var(--azul-1) 0%, var(--azul-2) 100%);
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .aukan-panel-header img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:2px solid var(--amarillo);
+    object-fit:cover;
+  }
+  .aukan-panel-header .info h4{
+    color:#fff;
+    font-size:13.5px;
+    font-weight:700;
+    margin:0;
+  }
+  .aukan-panel-header .info span{
+    color:#9fd7a8;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .aukan-panel-header .info span::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#3ddc6a;
+    display:inline-block;
+  }
+  .aukan-panel-close{
+    margin-left:auto;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    line-height:1;
+    opacity:.8;
+  }
+  .aukan-panel-close:hover{ opacity:1; }
+
+  .aukan-panel-body{
+    flex:1;
+    overflow-y:auto;
+    padding:16px;
+    background:#f6f7fb;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .aukan-msg-bot{
+    background:#fff;
+    border:1px solid #e3e2ee;
+    border-radius:14px 14px 14px 4px;
+    padding:11px 14px;
+    font-size:13px;
+    color:#222;
+    line-height:1.5;
+    max-width:88%;
+    align-self:flex-start;
+  }
+
+  .aukan-opciones{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .aukan-opciones button{
+    background:#fff;
+    border:1.5px solid var(--azul-2);
+    color:var(--azul-2);
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    padding:10px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    text-align:left;
+    transition:background .2s ease, color .2s ease;
+  }
+  .aukan-opciones button:hover{
+    background:var(--azul-2);
+    color:#fff;
+  }
+
+  .aukan-opciones button.aukan-volver{
+    border-color:#999;
+    color:#666;
+  }
+  .aukan-opciones button.aukan-volver:hover{
+    background:#666;
+    border-color:#666;
+    color:#fff;
+  }
+
+  .aukan-whatsapp-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:#25D366;
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    margin:4px 16px 16px;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .aukan-whatsapp-btn:hover{
+    background:#1ebe57;
+    transform:translateY(-2px);
+  }
+
+  /* ===== Sección Fechas Clave / Calendarios Académicos ===== */
+  .fechas-section{
+    background-color:#fffaf3;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:55px 60px 70px;
+  }
+  .fechas-tag{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--amarillo-hover);
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .fechas-tag .linea{
+    width:26px;
+    height:2px;
+    background:var(--amarillo-hover);
+    display:inline-block;
+  }
+  .fechas-section h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:32px;
+    color:#111;
+    margin-bottom:34px;
+  }
+
+  .fechas-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  @media (max-width:1000px){
+    .fechas-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:560px){
+    .fechas-grid{ grid-template-columns:1fr; }
+  }
+
+  .fecha-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid #e3e2ee;
+    border-top:4px solid var(--fecha-color);
+    border-radius:10px;
+    padding:20px 18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
+  }
+  .fecha-icono{
+    flex-shrink:0;
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    background:color-mix(in srgb, var(--fecha-color) 18%, white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    transition:background .3s ease, transform .3s ease;
+  }
+  .fecha-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    color:#111;
+    line-height:1.3;
+  }
+  .fecha-card span.sub{
+    display:block;
+    font-family:'Poppins', sans-serif;
+    font-weight:400;
+    font-size:12px;
+    color:#888;
+    margin-top:2px;
+  }
+
+  .fecha-card:hover{
+    transform:translateY(-5px);
+    background:color-mix(in srgb, var(--fecha-color) 10%, white);
+    box-shadow:0 14px 26px color-mix(in srgb, var(--fecha-color) 30%, transparent);
+    border-color:var(--fecha-color);
+  }
+  .fecha-card:hover .fecha-icono{
+    background:var(--fecha-color);
+    transform:scale(1.08);
+  }
+
+  .fecha-card.c1{ --fecha-color:#e8b23a; }
+  .fecha-card.c2{ --fecha-color:#2952d6; }
+  .fecha-card.c3{ --fecha-color:#e8623a; }
+  .fecha-card.c4{ --fecha-color:#28a566; }
+
+  /* ===== Sección Noticias (dos columnas) ===== */
+  .noticias-section{
+    background-color:#ffffff;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:55px 60px 70px;
+  }
+  .noticias-columnas{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:0;
+  }
+  @media (max-width:900px){
+    .noticias-columnas{ grid-template-columns:1fr; }
+    .noticias-divisor{ display:none; }
+  }
+
+  .noticias-divisor{
+    width:2px;
+    background:var(--amarillo);
+    margin:0 45px;
+    border-radius:2px;
+  }
+
+  .noticias-columna{ padding:0 5px; }
+
+  .noticias-cards{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+  }
+  @media (max-width:520px){
+    .noticias-cards{ grid-template-columns:1fr; }
+  }
+
+  .noticias-tag{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#6b6f80;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:2px;
+    margin-bottom:12px;
+  }
+  .noticias-tag .linea{
+    width:22px;
+    height:2px;
+    background:#6b6f80;
+    display:inline-block;
+  }
+  .noticias-columna h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:#111;
+    line-height:1.25;
+    margin-bottom:26px;
+  }
+
+  .noticia-card{
+    position:relative;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid #e3e2ee;
+    border-top:4px solid var(--amarillo);
+    border-radius:10px;
+    margin-bottom:0;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(20,32,107,.06);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .noticia-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 30px rgba(20,32,107,.18);
+    border-top-color:var(--azul-2);
+  }
+  .noticia-img{
+    width:100%;
+    aspect-ratio:16/11;
+    background-size:cover;
+    background-position:center;
+    background-color:#d9dbe6;
+  }
+  .noticia-body{ padding:14px 16px 18px; }
+  .noticia-fecha{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:1px;
+    color:var(--azul-2);
+    margin-bottom:6px;
+  }
+  .noticia-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:#111;
+    margin-bottom:6px;
+    line-height:1.3;
+  }
+  .noticia-card p{
+    font-family:'Poppins', sans-serif;
+    font-size:12.5px;
+    color:#5b5f73;
+    line-height:1.5;
+  }
+
+  /* ===== Sección Oferta Académica ===== */
+  .oferta-section{
+    background-color:#fffaf3;
+    background-image:radial-gradient(circle, #e7e0d3 1px, transparent 1.6px);
+    background-size:18px 18px;
+    padding:60px 60px 70px;
+  }
+  .oferta-tag{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--amarillo-hover);
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .oferta-tag .linea{
+    width:26px;
+    height:2px;
+    background:var(--amarillo-hover);
+    display:inline-block;
+  }
+  .oferta-section h2{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    color:#111;
+    line-height:1.25;
+    margin-bottom:18px;
+    max-width:640px;
+  }
+  .oferta-section p.oferta-desc{
+    font-family:'Poppins', sans-serif;
+    font-size:15px;
+    color:#3a3f55;
+    max-width:640px;
+    line-height:1.6;
+    margin-bottom:44px;
+  }
+
+  .oferta-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:22px;
+  }
+  @media (max-width:1100px){
+    .oferta-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:600px){
+    .oferta-grid{ grid-template-columns:1fr; }
+  }
+
+  .oferta-card{
+    position:relative;
+    overflow:hidden;
+    background:#ffffff;
+    border:1px solid #e3e2ee;
+    border-radius:14px;
+    padding:26px 24px;
+    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    cursor:pointer;
+  }
+  .oferta-card h3{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:#111;
+    margin-bottom:10px;
+    transition:color .3s ease;
+  }
+  .oferta-card p{
+    font-family:'Poppins', sans-serif;
+    font-size:13.5px;
+    color:#5b5f73;
+    line-height:1.55;
+    transition:color .3s ease;
+  }
+
+  /* Reflejo/brillo que atraviesa la tarjeta */
+  .oferta-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-75%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%);
+    transform:skewX(-20deg);
+    transition:left .65s ease;
+    pointer-events:none;
+  }
+  .oferta-card:hover::before{
+    left:130%;
+  }
+
+  .oferta-card:hover{
+    transform:translateY(-6px) scale(1.035);
+    border-color:var(--azul-2);
+    box-shadow:0 14px 28px rgba(28,63,174,.18);
+  }
+  .oferta-card:hover h3{
+    color:var(--azul-2);
+  }
+  .oferta-card:hover p{
+    color:#20264a;
+  }
+
+  /* Color distinto por casilla al pasar el mouse */
+  .oferta-card:nth-child(1):hover{ border-color:#1c3fae; box-shadow:0 14px 28px rgba(28,63,174,.2); }
+  .oferta-card:nth-child(1):hover h3{ color:#1c3fae; }
+
+  .oferta-card:nth-child(2):hover{ border-color:#c9932e; box-shadow:0 14px 28px rgba(201,147,46,.2); }
+  .oferta-card:nth-child(2):hover h3{ color:#c9932e; }
+
+  .oferta-card:nth-child(3):hover{ border-color:#0e9488; box-shadow:0 14px 28px rgba(14,148,136,.2); }
+  .oferta-card:nth-child(3):hover h3{ color:#0e9488; }
+
+  .oferta-card:nth-child(4):hover{ border-color:#8e3ad1; box-shadow:0 14px 28px rgba(142,58,209,.2); }
+  .oferta-card:nth-child(4):hover h3{ color:#8e3ad1; }
+
+  .oferta-card:nth-child(5):hover{ border-color:#d1483a; box-shadow:0 14px 28px rgba(209,72,58,.2); }
+  .oferta-card:nth-child(5):hover h3{ color:#d1483a; }
+
+  .oferta-card:nth-child(6):hover{ border-color:#2f9e44; box-shadow:0 14px 28px rgba(47,158,68,.2); }
+  .oferta-card:nth-child(6):hover h3{ color:#2f9e44; }
+
+  .oferta-card:nth-child(7):hover{ border-color:#d1487a; box-shadow:0 14px 28px rgba(209,72,122,.2); }
+  .oferta-card:nth-child(7):hover h3{ color:#d1487a; }
+
+  .cert-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(10,18,48,.9);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:30px;
+  }
+  .cert-lightbox.activo{ display:flex; }
+  .cert-lightbox img{
+    max-width:90%;
+    max-height:90vh;
+    border-radius:8px;
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+  }
+  .cert-lightbox-close{
+    position:absolute;
+    top:24px;
+    right:30px;
+    color:#fff;
+    font-size:30px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    line-height:1;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== Mini barra superior ===== -->
+  <div class="mini-bar">
+    <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=23jkS5tuAUmvOgT4H3hqCP64qBdQPK1LiE7MXwE5jGlUNkJVUktXRFJaQTUxNVI0TlAzSUJCWTNOTC4u&origin=lprLink&route=shorturl" target="_blank" rel="noopener">PQRSFD</a>
+  </div>
+
+  <!-- ===== Barra superior ===== -->
+  <div class="top-bar">
+    <div class="logo-area">
+      <img src="logo-incatec-cropped.png" alt="Incatec - Instituto de Capacitación Técnico">
+    </div>
+
+    <div class="top-right">
+      <div class="top-buttons" id="topButtons">
+        <a href="matricula.html" class="btn-pill" style="text-decoration:none; display:inline-block;">Matricúlate</a>
+        <button type="button" class="btn-pill">Soy estudiante</button>
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="">
+        <button type="submit">🔍</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Menú de navegación ===== -->
+  <div class="nav-bar" id="navBar">
+    <a href="index.html">Inicio</a>
+    <a href="programas.html" class="active">Programas</a>
+    <a href="linea-institucional.html">Línea institucional</a>
+    <a href="ruta-formacion.html">Ruta de Formación</a>
+    <a href="nosotros.html">Nosotros</a>
+  </div>
+
+  <!-- ===== Banner Programas (con estudiante) ===== -->
+  <div class="hero-programas">
+    <div class="glow">
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="hero-programas-texto">
+      <div class="hero-programas-tag"><span class="linea"></span>NUESTROS PROGRAMAS</div>
+      <h1>Encuentra el programa técnico <span>hecho para ti</span></h1>
+      <p>Explora nuestras 7 escuelas de formación y elige el camino que impulsará tu futuro laboral, con acompañamiento docente y práctica desde el primer semestre.</p>
+    </div>
+
+    <!-- Reemplaza por la foto real del estudiante (PNG con fondo transparente recomendado) -->
+    <img src="estudiante-programas.png" alt="Estudiante Incatec" class="hero-programas-img">
+  </div>
+
+  <!-- ===== Navegación rápida entre escuelas ===== -->
+  <div class="escuelas-nav-rapida">
+    <a href="#escuela-administrativa">Administrativa y Negocios</a>
+    <a href="#escuela-salud">Ciencias de la Salud, Belleza y Bienestar</a>
+    <a href="#escuela-arte-diseno">Arte y Diseño</a>
+    <a href="#escuela-innovacion-tecnologica">Innovación Tecnológica</a>
+    <a href="#escuela-investigacion-judicial">Investigación Judicial</a>
+    <a href="#escuela-educacion">Educación</a>
+    <a href="#escuela-bienestar-animal">Bienestar Animal</a>
+  </div>
+
+  <!-- ===== Administrativa y Negocios ===== -->
+  <section class="escuela-header" id="escuela-administrativa">
+    <h1>Administrativa y Negocios</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar Administrativo</h3>
+        <p style="font-family:'Poppins', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate en procesos administrativos, atención al cliente, organización y herramientas digitales para fortalecer tu perfil laboral.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Servicios Financieros</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla habilidades para apoyar procesos financieros, atención al cliente y gestión administrativa.
+        </p>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar Contable y Financiero</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Almacén y de Bodega</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate en recepción, almacenamiento, control de inventarios y manejo eficiente de mercancías.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Archivo y Registro</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla habilidades para clasificar, organizar, registrar y conservar documentos de manera eficiente.
+        </p>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Cartera y Cobranza</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Prepárate para apoyar procesos de cartera, seguimiento de pagos, cobranza y atención al cliente.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Mercadeo</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Aprende a apoyar estrategias de mercadeo, promoción, comunicación y atención a las necesidades del mercado.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Nómina y Prestaciones</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Prepárate para apoyar procesos de nómina, prestaciones sociales, novedades y gestión administrativa del personal.
+        </p>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Recursos Humanos</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla habilidades para apoyar procesos de selección, contratación, bienestar y gestión del talento humano.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Logística Empresarial</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate en procesos de almacenamiento, distribución, inventarios y operaciones logísticas empresariales.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Gestión Documental</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Aprende a administrar, clasificar, conservar y controlar documentos para una gestión eficiente.
+        </p>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Servicio al Cliente</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla habilidades de comunicación, atención y solución de necesidades para brindar experiencias positivas.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Compras y Negociación</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Prepárate para apoyar procesos de compras, selección de proveedores, negociación y gestión de adquisiciones.
+        </p>
+        <span class="programa-lugar">📍 Madrid</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Ciencias de la Salud, Belleza y Bienestar ===== -->
+  <section class="escuela-header" id="escuela-salud">
+    <h1>Ciencias de la Salud, Belleza y Bienestar</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar Administrativo en Salud</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate para apoyar procesos administrativos, atención al usuario, manejo de información y servicios en instituciones de salud.
+        </p>
+        <span class="programa-lugar">📍 Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Enfermería</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla conocimientos y habilidades para apoyar el cuidado integral de los pacientes y brindar una atención humana y responsable.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Salud Oral</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          ¡Una sonrisa saludable comienza con una buena atención! Prepárate para apoyar procesos de promoción, prevención y atención en salud oral.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Salud Pública</h3>
+        <p style="font-family:\'Poppins\', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate para apoyar acciones de promoción de la salud, prevención de enfermedades y educación para el cuidado integral de la comunidad.
+        </p>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Servicios Farmacéuticos</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Estética de Manos y Pies</h3>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Cosmetología y Estética Integral</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Manicurista de Tratamientos Estéticos para Manos y Pies</h3>
+        <span class="programa-lugar">📍 Madrid</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Arte y Diseño ===== -->
+  <section class="escuela-header" id="escuela-arte-diseno">
+    <h1>Arte y Diseño</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Diseño Gráfico</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar de Publicidad</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Ilustración Digital</h3>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Fotografía Publicitaria</h3>
+        <span class="programa-lugar">📍 Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Diseño de Marca</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Community Manager y Contenido Digital</h3>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Innovación Tecnológica ===== -->
+  <section class="escuela-header" id="escuela-innovacion-tecnologica">
+    <h1>Innovación Tecnológica</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Mantenimiento de Computadores</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Redes y Telecomunicaciones</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Desarrollo de Contenidos Digitales</h3>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Soporte Técnico TI</h3>
+        <span class="programa-lugar">📍 Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Sistemas y Programación Básica</h3>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Ciberseguridad Básica</h3>
+        <span class="programa-lugar">📍 Facatativá</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Investigación Judicial ===== -->
+  <section class="escuela-header" id="escuela-investigacion-judicial">
+    <h1>Investigación Judicial</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Investigación Criminalística</h3>
+        <p style="font-family:'Poppins', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Desarrolla conocimientos y habilidades para apoyar procesos de investigación criminalística, manejo de evidencias y análisis de información.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+</div>
+  </section>
+
+  <!-- ===== Educación ===== -->
+  <section class="escuela-header" id="escuela-educacion">
+    <h1>Educación</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3>Auxiliar en Educación a la Primera Infancia</h3>
+        <p style="font-family:'Poppins', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Prepárate para apoyar procesos de aprendizaje, cuidado y desarrollo integral de los niños en su primera etapa de vida. ¡Tu vocación puede transformar futuros!
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+</div>
+  </section>
+
+  <!-- ===== Bienestar Animal ===== -->
+  <section class="escuela-header" id="escuela-bienestar-animal">
+    <h1>Bienestar Animal</h1>
+  </section>
+
+  <section class="escuela-listado">
+    <div class="escuela-grid">
+
+
+      <div class="programa-card" id="cardVeterinariaProgramas" style="cursor:pointer;">
+        <span class="programa-badge">Técnico Laboral por Competencia</span>
+        <h3 style="font-weight:400;">Auxiliar de Veterinaria</h3>
+        <p style="font-family:'Poppins', sans-serif; font-size:12px; color:#5b5f73; line-height:1.5; margin:2px 0 14px;">
+          Fórmate como Técnico Laboral en Asistencia Veterinaria y adquiere conocimientos prácticos para apoyar el cuidado, bienestar y atención de animales.
+        </p>
+        <span class="programa-lugar">📍 Facatativá · Madrid</span>
+      </div>
+</div>
+  </section>
+
+  <!-- ===== Botones flotantes de contacto ===== -->
+  <div class="flotantes">
+    <div class="flotante-item">
+      <span class="flotante-texto">Servicios en línea</span>
+      <a href="#" class="flotante-boton" aria-label="Servicios en línea">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 12h4"/></svg>
+      </a>
+    </div>
+    <div class="flotante-item">
+      <span class="flotante-texto">Te asesoramos</span>
+      <a href="#" class="flotante-boton" aria-label="Te asesoramos">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== Widget de chat Aukán ===== -->
+  <div class="aukan-widget" id="aukanWidget">
+    <div class="aukan-panel">
+      <div class="aukan-panel-header">
+        <img src="aukan-juvenil-avatar.png" alt="Aukán">
+        <div class="info">
+          <h4>Aukán</h4>
+          <span>En línea</span>
+        </div>
+        <button class="aukan-panel-close" id="aukanClose" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="aukan-panel-body" id="aukanBody">
+        <!-- El contenido se genera dinámicamente con JS -->
+      </div>
+
+      <a href="https://wa.me/573172936239" target="_blank" rel="noopener" class="aukan-whatsapp-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.1a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.33c0-4.53 3.7-8.23 8.24-8.23 4.53 0 8.23 3.7 8.23 8.23 0 4.54-3.7 8.19-8.24 8.19zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.12-.17.25-.65.81-.8.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        Hablar con un asesor
+      </a>
+    </div>
+
+    <button class="aukan-toggle-btn" id="aukanToggle" aria-label="Abrir chat con Aukán"></button>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <img src="logo-incatec-cropped.png" alt="Incatec">
+        <p>Institución de Capacitación Técnico - INCATEC</p>
+        <div class="direccion">Calle 4 # 2 – 41<br>Sede Madrid, Cundinamarca</div>
+        <div class="direccion">Cra. 4 # 1 – 70<br>Sede Facatativá, Cundinamarca</div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Institución</h4>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="#">Valores y propósito</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Académico</h4>
+        <a href="#">Programas</a>
+        <a href="#">Campus Virtual</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Comunidad</h4>
+        <a href="linea-institucional.html">Línea institucional</a>
+        <a href="#">Egresados</a>
+        <a href="#">Bienestar</a>
+
+        <div class="footer-social" style="margin-top:18px;">
+          <span>Síguenos en</span>
+          <div class="footer-social-icons">
+            <a href="https://www.facebook.com/INCATEC" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg>
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/incatec1/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.24 2.22.41.56.21.96.47 1.38.89.42.42.68.82.89 1.38.17.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.8-.41 2.22a3.72 3.72 0 0 1-.89 1.38 3.72 3.72 0 0 1-1.38.89c-.42.17-1.05.36-2.22.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.24-2.22-.41a3.72 3.72 0 0 1-1.38-.89 3.72 3.72 0 0 1-.89-1.38c-.17-.42-.36-1.05-.41-2.22C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.8.41-2.22.21-.56.47-.96.89-1.38.42-.42.82-.68 1.38-.89.42-.17 1.05-.36 2.22-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.8c-3.15 0-3.5.01-4.73.07-.96.04-1.48.2-1.83.34-.46.18-.79.39-1.13.74-.35.34-.56.67-.74 1.13-.14.35-.3.87-.34 1.83-.06 1.23-.07 1.58-.07 4.73s.01 3.5.07 4.73c.04.96.2 1.48.34 1.83.18.46.39.79.74 1.13.34.35.67.56 1.13.74.35.14.87.3 1.83.34 1.23.06 1.58.07 4.73.07s3.5-.01 4.73-.07c.96-.04 1.48-.2 1.83-.34.46-.18.79-.39 1.13-.74.35-.34.56-.67.74-1.13.14-.35.3-.87.34-1.83.06-1.23.07-1.58.07-4.73s-.01-3.5-.07-4.73c-.04-.96-.2-1.48-.34-1.83a3 3 0 0 0-.74-1.13 3 3 0 0 0-1.13-.74c-.35-.14-.87-.3-1.83-.34-1.23-.06-1.58-.07-4.73-.07zm0 4.59a5.45 5.45 0 1 1 0 10.9 5.45 5.45 0 0 1 0-10.9zm0 1.8a3.65 3.65 0 1 0 0 7.3 3.65 3.65 0 0 0 0-7.3zm5.66-1.99a1.27 1.27 0 1 1-2.55 0 1.27 1.27 0 0 1 2.55 0z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/incatec1/" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.2v13.5a3.1 3.1 0 1 1-2.19-2.96V9.2a6.3 6.3 0 1 0 5.39 6.24V8.4a8.3 8.3 0 0 0 4.8 1.53V6.7a5.1 5.1 0 0 1-4.8-4.7z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="#">Escríbenos</a>
+        <a href="#">PQRSFD</a>
+        <img src="certificaciones.png" alt="Certificaciones Icontec / IQNET" style="max-width:220px; margin-top:8px; background:#fff; padding:8px; border-radius:8px;">
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ===== Lightbox del brochure de Veterinaria ===== -->
+  <div class="cert-lightbox" id="brochureLightboxProgramas">
+    <button class="cert-lightbox-close" id="brochureLightboxProgramasClose" aria-label="Cerrar">✕</button>
+    <img src="brochure-veterinaria.png" alt="Brochure Asistencia Veterinaria INCATEC">
+  </div>
+
+  <script>
+    // Al hacer clic en una pestaña, cambia de color y se mantiene marcada como activa
+    const links = document.querySelectorAll('#navBar a');
+    links.forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        links.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // ===== Botones Matricúlate / Soy estudiante =====
+    const topBtns = document.querySelectorAll('#topButtons .btn-pill');
+    topBtns.forEach(btn => {
+      btn.addEventListener('click', function(){
+        this.classList.toggle('on');
+      });
+    });
+
+    // ===== Widget de chat Aukán =====
+    const aukanWidget = document.getElementById('aukanWidget');
+    const aukanToggle = document.getElementById('aukanToggle');
+    const aukanClose = document.getElementById('aukanClose');
+    const aukanBody = document.getElementById('aukanBody');
+
+    aukanToggle.addEventListener('click', () => {
+      aukanWidget.classList.toggle('abierto');
+      if(aukanWidget.classList.contains('abierto') && aukanBody.childElementCount === 0){
+        mostrarMenuPrincipal();
+      }
+    });
+    aukanClose.addEventListener('click', () => {
+      aukanWidget.classList.remove('abierto');
+    });
+
+    function aukanLimpiar(){
+      aukanBody.innerHTML = '';
+    }
+
+    function aukanMensaje(texto){
+      const msg = document.createElement('div');
+      msg.className = 'aukan-msg-bot';
+      msg.innerHTML = texto;
+      aukanBody.appendChild(msg);
+    }
+
+    function aukanOpciones(botones){
+      const cont = document.createElement('div');
+      cont.className = 'aukan-opciones';
+      botones.forEach(b => {
+        const btn = document.createElement('button');
+        if(b.volver) btn.classList.add('aukan-volver');
+        btn.textContent = b.texto;
+        btn.addEventListener('click', b.accion);
+        cont.appendChild(btn);
+      });
+      aukanBody.appendChild(cont);
+      aukanBody.scrollTop = aukanBody.scrollHeight;
+    }
+
+    function mostrarMenuPrincipal(){
+      aukanLimpiar();
+      aukanMensaje('¡Hola! 👋 Soy <strong>Aukán</strong>, tu guía en INCATEC. ¿En qué te puedo ayudar hoy?');
+      aukanOpciones([
+        { texto: '🎓 Programas', accion: mostrarProgramas },
+        { texto: '🕐 Jornadas', accion: mostrarJornadas },
+        { texto: '💰 Costo', accion: mostrarCosto },
+        { texto: '📍 Sedes', accion: mostrarSedes },
+      ]);
+    }
+
+    function botonVolver(){
+      return { texto: '⬅ Volver al menú', volver: true, accion: mostrarMenuPrincipal };
+    }
+
+    function mostrarProgramas(){
+      aukanLimpiar();
+      aukanMensaje('Tenemos 7 escuelas con más de 40 programas técnicos laborales. Puedes ver el listado completo aquí:');
+      const cont = document.createElement('div');
+      cont.className = 'aukan-opciones';
+      const link = document.createElement('a');
+      link.href = 'programas.html';
+      link.textContent = 'Ver todos los programas →';
+      link.style.cssText = 'display:block;background:var(--azul-2);color:#fff;text-align:center;padding:10px 14px;border-radius:20px;text-decoration:none;font-weight:600;font-size:12.5px;';
+      cont.appendChild(link);
+      aukanBody.appendChild(cont);
+      aukanOpciones([ botonVolver() ]);
+    }
+
+    function mostrarJornadas(){
+      aukanLimpiar();
+      aukanMensaje('Manejamos <strong>3 jornadas</strong>:<br><br>☀️ Diurna: 7:00 a.m. – 1:00 p.m.<br>🌙 Nocturna: 6:00 p.m. – 9:00 p.m.<br>📅 Sabatina: 7:00 a.m. – 6:00 p.m.');
+      aukanOpciones([ botonVolver() ]);
+    }
+
+    function mostrarCosto(){
+      aukanLimpiar();
+      aukanMensaje('Los costos varían según el programa y la sede. Para darte información exacta, lo mejor es comunicarte directamente con nosotros 📞');
+      aukanOpciones([ botonVolver() ]);
+    }
+
+    function mostrarSedes(){
+      aukanLimpiar();
+      aukanMensaje('Contamos con 2 sedes:<br><br>📍 Facatativá, Cundinamarca<br>📍 Madrid, Cundinamarca');
+      aukanOpciones([ botonVolver() ]);
+    }
+
+    // ===== Lightbox del brochure de Veterinaria =====
+    const cardVeterinariaProgramas = document.getElementById('cardVeterinariaProgramas');
+    const brochureLightboxProgramas = document.getElementById('brochureLightboxProgramas');
+    const brochureLightboxProgramasClose = document.getElementById('brochureLightboxProgramasClose');
+
+    if(cardVeterinariaProgramas && brochureLightboxProgramas){
+      cardVeterinariaProgramas.addEventListener('click', () => {
+        brochureLightboxProgramas.classList.add('activo');
+      });
+      brochureLightboxProgramasClose.addEventListener('click', () => {
+        brochureLightboxProgramas.classList.remove('activo');
+      });
+      brochureLightboxProgramas.addEventListener('click', (e) => {
+        if(e.target === brochureLightboxProgramas) brochureLightboxProgramas.classList.remove('activo');
+      });
+    }
+  </script>
+
+</body>
+</html>
